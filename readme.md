@@ -58,6 +58,7 @@ It is deployed on **Streamlit Community Cloud** for interactive use.
 ## 3. Repository Structure
 ml_assignment_2/
 ├─ app.py # Streamlit app
+
 ├─ model/
 │ └─ saved_models.pkl # Pickled trained models & scaler
 ├─ data/
