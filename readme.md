@@ -1,42 +1,123 @@
-a. Problem Statement
-## Problem Statement
-This project predicts corporate credit ratings based on financial ratios
-such as profitability, leverage, and liquidity indicators. Accurate credit
-rating prediction helps investors and financial institutions assess credit
-risk and make informed lending and investment decisions.
+# Corporate Credit Rating Prediction (Binary Classification) - ML Assignment 2
 
-## Dataset Description
-Dataset Name: Corporate Credit Rating Prediction using Financial Ratios  
-Source: Kaggle  
-Total Samples: 7805  
-Total Features: 23 (excluding target variable)  
-Problem Type: Multiclass Classification  
+[Live Demo on Streamlit](https://mlassignment2-hemeshjoshi.streamlit.app/)
 
-The dataset contains corporate financial indicators and corresponding
-credit ratings issued by Standard & Poor’s.
+---
+
+## 1. Overview
+
+This project implements multiple **machine learning models** to predict corporate credit ratings as **binary classification** (Positive / Negative).  
+
+The app allows users to:
+
+- Upload a CSV dataset for evaluation or prediction  
+- Select from multiple trained models  
+- View evaluation metrics dynamically  
+- Visualize confusion matrix and classification reports  
+
+It is deployed on **Streamlit Community Cloud** for interactive use.
+
+---
+
+## 2. Features
+
+### ✅ Core Features
+
+1. **Dataset Upload (CSV)**
+   - Users can upload new datasets with the same features used in training.
+   - If the CSV contains a target column (`Binary Rating`), evaluation metrics are computed.  
+   - If the CSV does not contain a target column, the app only provides predictions and probabilities.
+
+2. **Model Selection**
+   - Available models:
+     - Logistic Regression
+     - Decision Tree
+     - K-Nearest Neighbors
+     - Naive Bayes
+     - Random Forest
+     - XGBoost
+   - Users can select the model to apply on the uploaded data.
+
+3. **Evaluation Metrics**
+   - Accuracy  
+   - Precision  
+   - Recall  
+   - F1 Score  
+   - Matthews Correlation Coefficient (MCC)  
+   - ROC AUC Score  
+
+4. **Visualizations**
+   - Confusion Matrix (Heatmap)  
+   - Detailed Classification Report (DataFrame)  
+
+5. **Prediction Download**
+   - Users can download the predictions for uploaded datasets as a CSV.
+
+---
+
+## 3. Repository Structure
+ml_assignment_2/
+├─ app.py # Streamlit app
+├─ model/
+│ └─ saved_models.pkl # Pickled trained models & scaler
+├─ data/
+│ └─ CreditRatingPrediction_train.csv # Training dataset
+├─ requirements.txt # Required Python packages
+└─ README.md
 
 
-Predict corporate credit ratings using financial ratios to assist investors and financial institutions in assessing credit risk.
+---
 
-b. Dataset Description
-
-The dataset contains 7,805 corporate records with 23 financial features such as profitability, leverage, and liquidity ratios. Ratings are sourced from Standard & Poor’s.
-
-| Model               | Accuracy | AUC | Precision | Recall | F1 | MCC |
-| ------------------- | -------- | --- | --------- | ------ | -- | --- |
-| Logistic Regression | ✔        | ✔   | ✔         | ✔      | ✔  | ✔   |
-| Decision Tree       | ✔        | ✔   | ✔         | ✔      | ✔  | ✔   |
-| KNN                 | ✔        | ✔   | ✔         | ✔      | ✔  | ✔   |
-| Naive Bayes         | ✔        | ✔   | ✔         | ✔      | ✔  | ✔   |
-| Random Forest       | ✔        | ✔   | ✔         | ✔      | ✔  | ✔   |
-| XGBoost             | ✔        | ✔   | ✔         | ✔      | ✔  | ✔   |
+## 4. Requirements
+### 4.1 Required packages include:
+streamlit
+pandas
+scikit-learn
+matplotlib
+seaborn
+xgboost
+numpy
 
 
-| Model               | Observation                                           |
-| ------------------- | ----------------------------------------------------- |
-| Logistic Regression | Performs well but limited for nonlinear relationships |
-| Decision Tree       | Captures nonlinearity but prone to overfitting        |
-| KNN                 | Sensitive to scaling and data size                    |
-| Naive Bayes         | Fast but assumes feature independence                 |
-| Random Forest       | Strong performance and robustness                     |
-| XGBoost             | Best overall performance with high generalization     |
+
+## 5. Getting Started
+### 5.1 Clone the Repository
+
+```bash
+git clone https://github.com/hemeshjoshi25/ml_assignment_2.git
+cd ml_assignment_2
+```
+
+### 5.2 Install Dependencies
+``` bash
+pip install -r requirements.txt
+```
+## 6. Run Locally
+```bash
+streamlit run app.py
+```
+
+## 6. CSV Upload Instructions
+
+Uploaded CSV must contain the same features as the training dataset, excluding these columns:
+Rating Date, CIK, Ticker, Sector, SIC Code, Corporation, Rating Agency, Rating
+
+If your CSV includes the target column Binary Rating, the app will compute evaluation metrics dynamically.
+If the CSV does not include the target, the app will only generate predictions and probabilities.
+Feature order must match the training dataset.
+
+## 7. Model Details
+Logistic Regression: Simple linear model for binary classification
+Decision Tree: Max depth = 10, interpretable tree structure
+KNN: K = 7, predicts based on nearest neighbors
+Naive Bayes: Gaussian assumption for feature distributions
+Random Forest: 200 trees, ensemble model
+XGBoost: Gradient boosting, objective = binary:logistic
+
+## 8. Deployment
+The app is deployed on Streamlit Community Cloud.
+https://mlassignment2-hemeshjoshi.streamlit.app/
+
+## 9. Author Hemesh Joshi
+M.Tech (AI & ML) - Work Integrated Learning Program (BITS WILP)
+GitHub: https://github.com/hemeshjoshi25
