@@ -96,7 +96,7 @@ ml_assignment_2/
   -  evaluate.py
 - data/
   - CreditRatingPrediction_train.csv # Training dataset
-  - - CreditRatingPrediction_test.csv # Training dataset
+  - CreditRatingPrediction_test.csv # Training dataset
 - requirements.txt # Required Python packages
 - README.md
 
