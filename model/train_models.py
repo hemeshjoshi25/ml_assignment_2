@@ -18,7 +18,6 @@ DATA_PATH = os.path.join(BASE_DIR, "data", "CreditRatingPrediction_train.csv")
 data = pd.read_csv(DATA_PATH)
 
 def data_preprocessing(data):
-    data = data[data["Rating Agency"] == "Standard & Poor's Ratings Services"]
     data = (data.drop
             (columns=["Rating Date", "CIK", "Ticker", "Sector", "SIC Code", "Corporation", "Rating Agency", 'Rating']))
     X = data.drop(['Binary Rating'], axis=1)

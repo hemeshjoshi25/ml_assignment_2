@@ -1,5 +1,6 @@
 import os
 
+import numpy as np
 import pandas as pd
 import pickle
 from model import train_models
@@ -126,6 +127,12 @@ if uploaded:
         y_pred_uploaded = model.predict(X_scaled)
         y_prob_uploaded = model.predict_proba(X_scaled)[:, 1]
 
+        output_df = pd.DataFrame({
+            "Company": df['Corporation'],
+            "Predicted_Binary_Rating": y_pred_uploaded,
+            "Investment_Grade_Probability": y_prob_uploaded
+        })
+
         if y_uploaded is not None:
             st.subheader("Evaluation Metrics on Uploaded(Test) Data file")
             # Compute metrics
@@ -135,10 +142,22 @@ if uploaded:
             # Classification Report
             report_description("Classification Report (Uploaded Data)", y_uploaded, y_pred_uploaded)
 
-        else:
-            # If no target column, just show predictions and probabilities
-            df_output = X_uploaded.copy()
-            df_output["Predicted_Class"] = y_pred_uploaded
-            df_output["Positive_Class_Probability"] = y_prob_uploaded
-            st.subheader("Prediction Results (No Target Column)")
-            st.dataframe(df_output)
+        df_output = X_uploaded.copy()
+        df_output["Company"] = df["Corporation"]
+        df_output["Predicted_Class"] = np.nan
+
+
+        # Fill only rows actually predicted
+        df_output.loc[X_uploaded.index, "Predicted_Class"] = y_pred_uploaded
+        df_output.loc[X_uploaded.index, "Predicted_Label"] = pd.Series(y_pred_uploaded, index=X_uploaded.index).map({
+            1: "Investment Grade",
+            0: "Speculative Grade"
+        })
+
+        last_cols = df_output.columns[-3:]  # Get last 3 column names
+        first_cols = df_output.columns[:-3]  # Get remaining columns
+        df_reordered = df_output[list(last_cols) + list(first_cols)]
+
+        # Display Streamlit table
+        st.subheader("Predictions Mapped to Original Data")
+        st.dataframe(df_reordered)
