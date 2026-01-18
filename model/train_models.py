@@ -13,13 +13,9 @@ from xgboost import XGBClassifier
 
 # Load data
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(BASE_DIR, "data", "CreditRatingPrediction.csv")
+DATA_PATH = os.path.join(BASE_DIR, "data", "CreditRatingPrediction_train.csv")
 
 data = pd.read_csv(DATA_PATH)
-
-# Filter rating agency
-data = data[data["Rating Agency"] == "Standard & Poor's Ratings Services"]
-
 
 data = (data.drop
         (columns=["Rating Date", "CIK", "Ticker", "Sector", "SIC Code", "Corporation", "Rating Agency", 'Rating']))
