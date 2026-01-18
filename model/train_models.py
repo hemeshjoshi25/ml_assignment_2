@@ -18,6 +18,7 @@ DATA_PATH = os.path.join(BASE_DIR, "data", "CreditRatingPrediction_train.csv")
 data = pd.read_csv(DATA_PATH)
 
 def data_preprocessing(data):
+    data = data[data["Rating Agency"] == "Standard & Poor's Ratings Services"]
     data = (data.drop
             (columns=["Rating Date", "CIK", "Ticker", "Sector", "SIC Code", "Corporation", "Rating Agency", 'Rating']))
     X = data.drop(['Binary Rating'], axis=1)
@@ -38,15 +39,46 @@ X_test = scaler.transform(X_test)
 
 # Models
 models = {
-    "Logistic Regression": LogisticRegression(max_iter=2000),
-    "Decision Tree": DecisionTreeClassifier(max_depth=10),
-    "KNN": KNeighborsClassifier(n_neighbors=7),
+    "Logistic Regression": LogisticRegression(
+        max_iter=2000,  # ensure convergence
+        penalty='l2',   # L2 regularization
+        C=0.5,          # regularization strength
+        solver='lbfgs'
+    ),
+    "Decision Tree": DecisionTreeClassifier(
+        max_depth=5,           # limit depth
+        min_samples_split=20,  # prevent splits on very small nodes
+        min_samples_leaf=10,    # minimum samples per leaf
+        random_state=42
+    ),
+    "KNN": KNeighborsClassifier(
+        n_neighbors=3,       # slightly higher k
+        weights='distance',  # closer neighbors have more influence
+        metric='minkowski',
+        p=2
+    ),
     "Naive Bayes": GaussianNB(),
-    "Random Forest": RandomForestClassifier(n_estimators=200),
+    "Random Forest": RandomForestClassifier(
+        n_estimators=300,     # more trees
+        max_depth=5,          # limit depth to prevent overfitting
+        min_samples_split=20,
+        min_samples_leaf=10,
+        random_state=42,
+        n_jobs=1
+    ),
     "XGBoost": XGBClassifier(
         objective="binary:logistic",
         eval_metric="logloss",
-        use_label_encoder=False
+        use_label_encoder=False,
+        max_depth=3,         # shallower trees
+        learning_rate=0.05,   # smaller step size
+        n_estimators=300,    # more trees
+        subsample=0.7,       # row sampling
+        colsample_bytree=0.7,# feature sampling
+        reg_alpha=0.5,  # L1 regularization
+        reg_lambda=1.5,  # L2 regularization
+        min_child_weight=5,  # prevents tiny leaves
+        random_state=42
     )
 }
 

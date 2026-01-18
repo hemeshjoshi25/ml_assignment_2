@@ -3,8 +3,34 @@
 [Live Demo on Streamlit](https://mlassignment2-hemeshjoshi.streamlit.app/)
 
 ---
+## Business Problem Framing: Binary Credit Rating Classification
 
-## 1. Overview
+Credit rating agencies assign detailed ratings (e.g., AAA, AA+, AA, …, D) to assess a company’s creditworthiness. However, in real-world financial decision-making—such as investment screening, credit risk assessment, and lending approvals—the primary concern is whether a company qualifies as investment grade or non-investment grade, rather than its exact rating category.
+
+To align the machine learning solution with this business objective, the original multi-class credit rating labels were intentionally dropped and the problem was reformulated as a binary classification task only for Standard & Poor's Credit Rating.
+
+### Target Variable Definition
+
+Column Binary Rating used as target variable where Investment Grade (Label = 1) and Non-Investment Grade (Label = 0)
+Credit ratings of BBB− and above, indicating financially stable companies with relatively low default risk.
+
+
+### Why Binary Classification?
+
+Reframing the problem as a binary classification task provides several practical advantages:
+
+Business relevance: Directly answers the key question—Is this company safe to invest in?
+
+Improved model stability: Reduces noise and ambiguity present in fine-grained rating classes.
+
+Lower overfitting risk: Avoids sparsity issues associated with multiple low-frequency rating categories.
+
+Clear interpretability: Produces outputs that are easily understood by non-technical stakeholders.
+
+This approach ensures that the machine learning models deliver actionable, decision-ready insights aligned with real-world financial and investment use cases
+
+
+## 1. Project Overview
 
 This project implements multiple **machine learning models** to predict corporate credit ratings as **binary classification** (Positive / Negative).  
 
@@ -23,7 +49,15 @@ It is deployed on **Streamlit Community Cloud** for interactive use.
 
 ### ✅ Core Features
 
-1. **Dataset Upload (CSV)**
+1. **Dataset Upload (CSV)** - Data Referred from Kaggle
+    ```bash
+    import kagglehub
+    
+    # Download latest version
+    path = kagglehub.dataset_download("agewerc/corporate-credit-rating")
+    
+    print("Path to dataset files:", path)
+   ```
    - Users can upload new datasets with the same features used in training.
    - If the CSV contains a target column (`Binary Rating`), evaluation metrics are computed.  
    - If the CSV does not contain a target column, the app only provides predictions and probabilities.
