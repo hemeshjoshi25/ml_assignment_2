@@ -1,95 +1,93 @@
 # Corporate Credit Rating Prediction (Binary Classification) - ML Assignment 2
 
-[Live Demo on Streamlit](https://mlassignment2-hemeshjoshi.streamlit.app/)
+🔗 Live Streamlit App:
+https://mlassignment2-hemeshjoshi.streamlit.app/
 
 ---
-## Business Problem Framing: Binary Credit Rating Classification
+## 1. Problem Statement
 
-Credit rating agencies assign detailed ratings (e.g., AAA, AA+, AA, …, D) to assess a company’s creditworthiness. However, in real-world financial decision-making—such as investment screening, credit risk assessment, and lending approvals—the primary concern is whether a company qualifies as investment grade or non-investment grade, rather than its exact rating category.
+**Business Problem Framing:** Binary Credit Rating Classification
 
-To align the machine learning solution with this business objective, the original multi-class credit rating labels were intentionally dropped and the problem was reformulated as a binary classification task only for Standard & Poor's Credit Rating.
+Credit rating agencies such as Standard & Poor’s (S&P) assign detailed credit ratings (AAA, AA+, AA, …, D) to evaluate a company’s creditworthiness. However, in many real-world financial decision-making scenarios—such as investment screening, credit risk assessment, and lending approvals—the primary requirement is to determine whether a company is Investment Grade or Non-Investment Grade, rather than predicting the exact rating category.
 
-### Target Variable Definition
+To align the machine learning solution with this practical business objective, the original multi-class credit rating labels were intentionally dropped, and the problem was reformulated as a binary classification task based on Standard & Poor’s Credit Ratings.
 
-Column Binary Rating used as target variable where Investment Grade (Label = 1) and Non-Investment Grade (Label = 0)
-Credit ratings of BBB− and above, indicating financially stable companies with relatively low default risk.
+**Target Variable Definition**
+
+The target variable used is Binary Rating, defined as:
+
+1 – Investment Grade: Credit ratings of BBB− and above
+
+0 – Non-Investment Grade: Ratings below BBB−
+
+This formulation enables effective prediction of corporate creditworthiness using financial ratios while simplifying the decision boundary for real-world applications.
+
+## 2. Dataset Description
+
+Dataset Name: Corporate Credit Rating with Financial Ratios
+
+Source: Kaggle
+
+Type: Binary Classification
+
+Number of Records: > 500
+
+Number of Features: > 12
+
+The dataset satisfies all assignment constraints regarding minimum instance size and feature count.
+
+```bash
+import kagglehub
+
+# Download latest version
+path = kagglehub.dataset_download("agewerc/corporate-credit-rating")
+
+print("Path to dataset files:", path)
+```
+## 3. Machine Learning Models Implemented
+
+The following six classification models were implemented on the same dataset and evaluated using a consistent train-test split:
+
+1. Logistic Regression 
+2. Decision Tree Classifier 
+3. K-Nearest Neighbors (KNN)
+4. Naive Bayes (Gaussian)
+5. Random Forest (Ensemble Model)
+6. XGBoost (Ensemble Model)
+
+### Evaluation Metrics
+Each model is evaluated using the following metrics as required by the assignment:
+1. Accuracy 
+2. Precision 
+3. Recall 
+4. F1 Score 
+5. AUC Score 
+6. Matthews Correlation Coefficient (MCC)
+
+| ML Model                  | Accuracy | AUC   | Precision | Recall | F1 Score | MCC   |
+| ------------------------- | -------- | ----- | --------- | ------ | -------- | ----- |
+| Logistic Regression       | 0.814    | 0.843 | 0.815     | 0.934  | 0.871    | 0.558 |
+| Decision Tree             | ___      | ___   | ___       | ___    | ___      | ___   |
+| K-Nearest Neighbors (KNN) | ___      | ___   | ___       | ___    | ___      | ___   |
+| Naive Bayes               | ___      | ___   | ___       | ___    | ___      | ___   |
+| Random Forest (Ensemble)  | ___      | ___   | ___       | ___    | ___      | ___   |
+| XGBoost (Ensemble)        | ___      | ___   | ___       | ___    | ___      | ___   |
 
 
-### Why Binary Classification?
+## 4. Model-Wise Observation
 
-Reframing the problem as a binary classification task provides several practical advantages:
-
-Business relevance: Directly answers the key question—Is this company safe to invest in?
-
-Improved model stability: Reduces noise and ambiguity present in fine-grained rating classes.
-
-Lower overfitting risk: Avoids sparsity issues associated with multiple low-frequency rating categories.
-
-Clear interpretability: Produces outputs that are easily understood by non-technical stakeholders.
-
-This approach ensures that the machine learning models deliver actionable, decision-ready insights aligned with real-world financial and investment use cases
+| ML Model                      | Observation                                                                                                                                                                               |
+| ----------------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Logistic Regression**       | Performs well as a baseline model with high recall, making it suitable for minimizing false negatives in credit risk assessment. However, it assumes linear separability between classes. |
+| **Decision Tree**             | Captures non-linear relationships effectively but shows signs of overfitting when depth increases. Performance is sensitive to tree depth.                                                |
+| **K-Nearest Neighbors (KNN)** | Performance depends heavily on feature scaling and choice of K. Computationally expensive for large datasets but effective for localized decision boundaries.                             |
+| **Naive Bayes**               | Fast and efficient with reasonable performance. Assumes feature independence, which limits its predictive power for correlated financial ratios.                                          |
+| **Random Forest**             | Demonstrates strong and stable performance due to ensemble averaging. Reduces overfitting compared to a single decision tree.                                                             |
+| **XGBoost**                   | Achieves the best overall performance in terms of accuracy and AUC. Effectively captures complex feature interactions using gradient boosting.                                            |
 
 
-## 1. Project Overview
 
-This project implements multiple **machine learning models** to predict corporate credit ratings as **binary classification** (Positive / Negative).  
-
-The app allows users to:
-
-- Upload a CSV dataset for evaluation or prediction  
-- Select from multiple trained models  
-- View evaluation metrics dynamically  
-- Visualize confusion matrix and classification reports  
-
-It is deployed on **Streamlit Community Cloud** for interactive use.
-
----
-
-## 2. Features
-
-### ✅ Core Features
-
-1. **Dataset Upload (CSV)** - Data Referred from Kaggle
-    ```bash
-    import kagglehub
-    
-    # Download latest version
-    path = kagglehub.dataset_download("agewerc/corporate-credit-rating")
-    
-    print("Path to dataset files:", path)
-   ```
-   - Users can upload new datasets with the same features used in training.
-   - If the CSV contains a target column (`Binary Rating`), evaluation metrics are computed.  
-   - If the CSV does not contain a target column, the app only provides predictions and probabilities.
-
-2. **Model Selection**
-   - Available models:
-     - Logistic Regression
-     - Decision Tree
-     - K-Nearest Neighbors
-     - Naive Bayes
-     - Random Forest
-     - XGBoost
-   - Users can select the model to apply on the uploaded data.
-
-3. **Evaluation Metrics**
-   - Accuracy  
-   - Precision  
-   - Recall  
-   - F1 Score  
-   - Matthews Correlation Coefficient (MCC)  
-   - ROC AUC Score  
-
-4. **Visualizations**
-   - Confusion Matrix (Heatmap)  
-   - Detailed Classification Report (DataFrame)  
-
-5. **Prediction Download**
-   - Users can download the predictions for uploaded datasets as a CSV.
-
----
-
-## 3. Repository Structure
+## 5. Repository Structure
 ml_assignment_2/
 ├─ app.py # Streamlit app
 
@@ -103,36 +101,37 @@ ml_assignment_2/
 
 ---
 
-## 4. Requirements
-### 4.1 Required packages include:
-streamlit
-pandas
-scikit-learn
-matplotlib
-seaborn
-xgboost
-numpy
+## 6. Requirements
+### 6.1 Required packages include:
+streamlit – version 1.52.2
+pandas – version 2.3.3
+scikit-learn – version 1.7.2
+matplotlib – version 3.10.7
+seaborn – version – 0.13.2
+xgboost -version 3.1.2
+numpy – version 2.3.4
 
 
 
-## 5. Getting Started
-### 5.1 Clone the Repository
+## 7. Getting Started
+### 7.1 Clone the Repository
 
 ```bash
 git clone https://github.com/hemeshjoshi25/ml_assignment_2.git
 cd ml_assignment_2
 ```
 
-### 5.2 Install Dependencies
+### 7.2 Install Dependencies
 ``` bash
 pip install -r requirements.txt
+
 ```
-## 6. Run Locally
+## 8. Run Locally
 ```bash
 streamlit run app.py
 ```
 
-## 6. CSV Upload Instructions
+## 9. CSV Upload Instructions
 
 Uploaded CSV must contain the same features as the training dataset, excluding these columns:
 Rating Date, CIK, Ticker, Sector, SIC Code, Corporation, Rating Agency, Rating
@@ -141,7 +140,7 @@ If your CSV includes the target column Binary Rating, the app will compute evalu
 If the CSV does not include the target, the app will only generate predictions and probabilities.
 Feature order must match the training dataset.
 
-## 7. Model Details
+## 10. Model Details
 Logistic Regression: Simple linear model for binary classification
 Decision Tree: Max depth = 10, interpretable tree structure
 KNN: K = 7, predicts based on nearest neighbors
@@ -149,10 +148,10 @@ Naive Bayes: Gaussian assumption for feature distributions
 Random Forest: 200 trees, ensemble model
 XGBoost: Gradient boosting, objective = binary:logistic
 
-## 8. Deployment
+## 11. Deployment
 The app is deployed on Streamlit Community Cloud.
 https://mlassignment2-hemeshjoshi.streamlit.app/
 
-## 9. Author Hemesh Joshi
+## 12. Author Hemesh Joshi
 M.Tech (AI & ML) - Work Integrated Learning Program (BITS WILP)
 GitHub: https://github.com/hemeshjoshi25

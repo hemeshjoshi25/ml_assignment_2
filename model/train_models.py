@@ -45,7 +45,7 @@ models = {
         solver='lbfgs'
     ),
     "Decision Tree": DecisionTreeClassifier(
-        max_depth=5,           # limit depth
+        max_depth=10,           # limit depth
         min_samples_split=20,  # prevent splits on very small nodes
         min_samples_leaf=10,    # minimum samples per leaf
         random_state=42
@@ -58,7 +58,7 @@ models = {
     ),
     "Naive Bayes": GaussianNB(),
     "Random Forest": RandomForestClassifier(
-        n_estimators=300,     # more trees
+        n_estimators=200,     # more trees
         max_depth=5,          # limit depth to prevent overfitting
         min_samples_split=20,
         min_samples_leaf=10,
@@ -71,7 +71,7 @@ models = {
         use_label_encoder=False,
         max_depth=3,         # shallower trees
         learning_rate=0.05,   # smaller step size
-        n_estimators=300,    # more trees
+        n_estimators=200,    # more trees
         subsample=0.7,       # row sampling
         colsample_bytree=0.7,# feature sampling
         reg_alpha=0.5,  # L1 regularization
