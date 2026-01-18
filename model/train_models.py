@@ -17,12 +17,14 @@ DATA_PATH = os.path.join(BASE_DIR, "data", "CreditRatingPrediction_train.csv")
 
 data = pd.read_csv(DATA_PATH)
 
-data = (data.drop
-        (columns=["Rating Date", "CIK", "Ticker", "Sector", "SIC Code", "Corporation", "Rating Agency", 'Rating']))
+def data_preprocessing(data):
+    data = (data.drop
+            (columns=["Rating Date", "CIK", "Ticker", "Sector", "SIC Code", "Corporation", "Rating Agency", 'Rating']))
+    X = data.drop(['Binary Rating'], axis=1)
+    y = data['Binary Rating']
+    return X, y
 
-X = data.drop(['Binary Rating'], axis=1)
-y = data['Binary Rating']
-
+X, y =data_preprocessing(data)
 
 # Split
 X_train, X_test, y_train, y_test = train_test_split(
