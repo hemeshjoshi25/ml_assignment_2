@@ -33,10 +33,10 @@ It is deployed on **Streamlit Community Cloud** for interactive use.
 1. **Dataset Upload (CSV)** - Data Referred from Kaggle
     ```bash
     import kagglehub
-    
+
     # Download latest version
-    path = kagglehub.dataset_download("agewerc/corporate-credit-rating")
-    
+    path = kagglehub.dataset_download("kirtandelwadia/corporate-credit-rating-with-financial-ratios")
+
     print("Path to dataset files:", path)
    ```
    - Users can upload new datasets with the same features used in training.
