@@ -89,15 +89,16 @@ Each model is evaluated using the following metrics as required by the assignmen
 
 ## 5. Repository Structure
 ml_assignment_2/
-├─ app.py # Streamlit app
-
-├─ model/
-│ └─ saved_models.pkl # Pickled trained models & scaler
-├─ data/
-│ └─ CreditRatingPrediction_train.csv # Training dataset
-├─ requirements.txt # Required Python packages
-└─ README.md
-
+- app.py # Streamlit app
+- model/
+  -  saved_models.pkl # Pickled trained models & scaler
+  -  train_models.py
+  -  evaluate.py
+- data/
+  - CreditRatingPrediction_train.csv # Training dataset
+  - - CreditRatingPrediction_test.csv # Training dataset
+- requirements.txt # Required Python packages
+- README.md
 
 ---
 
@@ -110,8 +111,6 @@ matplotlib – version 3.10.7
 seaborn – version – 0.13.2
 xgboost -version 3.1.2
 numpy – version 2.3.4
-
-
 
 ## 7. Getting Started
 ### 7.1 Clone the Repository
