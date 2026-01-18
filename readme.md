@@ -66,12 +66,12 @@ Each model is evaluated using the following metrics as required by the assignmen
 
 | ML Model                  | Accuracy | AUC   | Precision | Recall | F1 Score | MCC   |
 | ------------------------- | -------- | ----- | --------- | ------ | -------- | ----- |
-| Logistic Regression       | 0.814    | 0.843 | 0.815     | 0.934  | 0.871    | 0.558 |
-| Decision Tree             | ___      | ___   | ___       | ___    | ___      | ___   |
-| K-Nearest Neighbors (KNN) | ___      | ___   | ___       | ___    | ___      | ___   |
-| Naive Bayes               | ___      | ___   | ___       | ___    | ___      | ___   |
-| Random Forest (Ensemble)  | ___      | ___   | ___       | ___    | ___      | ___   |
-| XGBoost (Ensemble)        | ___      | ___   | ___       | ___    | ___      | ___   |
+| Logistic Regression       | 0.792    | 0.823 | 0.799     | 0.922  | 0.856    | 0.504 |
+| Decision Tree             | 0.847    | 0.902 | 0.879     | 0.895  | 0.887    | 0.650 |
+| K-Nearest Neighbors (KNN) | 0.919    | 0.941 | 0.932     | 0.948  | 0.940    | 0.815 |
+| Naive Bayes               | 0.713    | 0.742 | 0.713     | 0.959  | 0.818    | 0.271 |
+| Random Forest (Ensemble)  | 0.810    | 0.866 | 0.808     | 0.941  | 0.869    | 0.551 |
+| XGBoost (Ensemble)        | 0.848    | 0.907 | 0.860     | 0.925  | 0.891    | 0.647 | 
 
 
 ## 4. Model-Wise Observation
