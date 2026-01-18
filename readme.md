@@ -89,7 +89,6 @@ Each model is evaluated using the following metrics as required by the assignmen
 
 ## 5. Repository Structure
 ml_assignment_2/
-- app.py # Streamlit app
 - model/
   -  saved_models.pkl # Pickled trained models & scaler
   -  train_models.py
@@ -97,6 +96,7 @@ ml_assignment_2/
 - data/
   - CreditRatingPrediction_train.csv # Training dataset
   - CreditRatingPrediction_test.csv # Training dataset
+- app.py # Streamlit app
 - requirements.txt # Required Python packages
 - README.md
 
