@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import pickle
 from model import train_models
@@ -66,7 +68,8 @@ st.title("Corporate Credit Rating Prediction (Binary Classification)")
 # --------------------------------------------------
 # Load trained models and test set
 # --------------------------------------------------
-with open(r"model\saved_models.pkl", "rb") as f:
+MODEL_PATH = os.path.join("model", "saved_models.pkl")
+with open(MODEL_PATH, "rb") as f:
     bundle = pickle.load(f)
 
 models = bundle["models"]
