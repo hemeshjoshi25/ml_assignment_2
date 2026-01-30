@@ -38,7 +38,6 @@ def metrics_calculation(y_true, y_pred, y_prob):
     col6.metric("MCC Score", f"{mcc:.3f}")
 
 def confusion_matrix_plot(y_true, y_pred, color):
-    st.subheader("Confusion Matrix (Test Set)")
     fig, ax = plt.subplots(figsize=(3, 3))
     sns.heatmap(
         confusion_matrix(y_true, y_pred).T,
@@ -142,6 +141,7 @@ if uploaded:
             # Compute metrics
             metrics_calculation(y_uploaded, y_pred_uploaded, y_prob_uploaded)
             # Confusion Matrix
+            st.subheader("Confusion Matrix (Test Data)")
             confusion_matrix_plot(y_uploaded, y_pred_uploaded, "Blues")
             # Classification Report
             report_description("Classification Report (Uploaded Data)", y_uploaded, y_pred_uploaded)
@@ -177,7 +177,8 @@ y_prob_test = model.predict_proba(X_test)[:, 1]
 #Metrics Calculation
 metrics_calculation(y_test, y_pred_test, y_prob_test)
 # Confusion Matrix
+st.subheader("Confusion Matrix (Training Data)")
 confusion_matrix_plot(y_test, y_pred_test, "Reds")
 # Classification Report
-report_description("Detailed Classification Report (Test Set)", y_test, y_pred_test)
+report_description("Detailed Classification Report (Training Data)", y_test, y_pred_test)
 
