@@ -82,25 +82,23 @@ y_test = bundle["y_test"]
 model_name = st.sidebar.selectbox("Select ML Model", list(models.keys()))
 model = models[model_name]
 
-# --------------------------------------------------
-# Section 1: Metrics on original test set
-# --------------------------------------------------
-st.subheader("Evaluation on Original Validation Set of Training Data")
+st.sidebar.markdown("### 📥 Assignment Test Dataset")
 
-y_pred_test = model.predict(X_test)
-y_prob_test = model.predict_proba(X_test)[:, 1]
+TEST_CSV_URL = (
+    "https://github.com/hemeshjoshi25/"
+    "ml_assignment_2/tree/master/data/CreditRatingPrediction_test.csv"
+)
 
-#Metrics Calculation
-metrics_calculation(y_test, y_pred_test, y_prob_test)
-# Confusion Matrix
-confusion_matrix_plot(y_test, y_pred_test, "Reds")
-# Classification Report
-report_description("Detailed Classification Report (Test Set)", y_test, y_pred_test)
+st.sidebar.markdown(
+    f"[⬇ Download Test Data CSV]({TEST_CSV_URL})"
+)
+
 
 # --------------------------------------------------
 # Section 2: CSV Upload - dynamic inference & evaluation
 # --------------------------------------------------
 st.subheader("Upload New Dataset for Predictions / Evaluation")
+st.caption("Upload Test dataset to view matrix and sample data of test data. Test Data CSV can be downloaded from left link")
 
 uploaded = st.file_uploader("Upload CSV file", type=["csv"])
 
@@ -161,3 +159,19 @@ if uploaded:
         # Display Streamlit table
         st.subheader("Predictions Mapped to Original Data")
         st.dataframe(df_reordered)
+
+# --------------------------------------------------
+# Section 1: Metrics on original test set
+# --------------------------------------------------
+st.subheader("Evaluation on Original Validation Set of Training Data")
+
+y_pred_test = model.predict(X_test)
+y_prob_test = model.predict_proba(X_test)[:, 1]
+
+#Metrics Calculation
+metrics_calculation(y_test, y_pred_test, y_prob_test)
+# Confusion Matrix
+confusion_matrix_plot(y_test, y_pred_test, "Reds")
+# Classification Report
+report_description("Detailed Classification Report (Test Set)", y_test, y_pred_test)
+

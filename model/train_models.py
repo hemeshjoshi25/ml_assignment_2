@@ -85,8 +85,12 @@ models = {
 for model in models.values():
     model.fit(X_train, y_train)
 
-# Save everything
-with open(r"saved_models.pkl", "wb") as f:
+MODEL_DIR = "model"
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+# Save everything inside 'model/' folder
+MODEL_PATH = os.path.join(MODEL_DIR, "saved_models.pkl")
+with open(MODEL_PATH, "wb") as f:
     pickle.dump({
         "models": models,
         "scaler": scaler,
@@ -94,4 +98,4 @@ with open(r"saved_models.pkl", "wb") as f:
         "y_test": y_test
     }, f)
 
-print("Models trained and saved successfully")
+print(f"Models trained and saved successfully at {MODEL_PATH}")
