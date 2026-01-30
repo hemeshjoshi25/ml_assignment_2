@@ -82,17 +82,23 @@ y_test = bundle["y_test"]
 model_name = st.sidebar.selectbox("Select ML Model", list(models.keys()))
 model = models[model_name]
 
-st.sidebar.markdown("### 📥 Assignment Test Dataset")
+st.sidebar.markdown("Download Test Dataset")
 
 TEST_CSV_URL = (
-    "https://github.com/hemeshjoshi25/"
-    "ml_assignment_2/tree/master/data/CreditRatingPrediction_test.csv"
+    "https://raw.githubusercontent.com/hemeshjoshi25"
+    "/ml_assignment_2/refs/heads/master/data/CreditRatingPrediction_test.csv"
 )
 
-st.sidebar.markdown(
-    f"[⬇ Download Test Data CSV]({TEST_CSV_URL})"
-)
+df = pd.read_csv(TEST_CSV_URL)
 
+
+# Create a download button
+st.sidebar.download_button(
+    label="Download Test Data CSV",
+    data=df.to_csv(index=False).encode('utf-8'),
+    file_name="CreditRatingPrediction_test.csv",
+    mime="text/csv"
+)
 
 # --------------------------------------------------
 # Section 2: CSV Upload - dynamic inference & evaluation
