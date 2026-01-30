@@ -135,6 +135,8 @@ streamlit run app.py
 Uploaded CSV must contain the same features as the training dataset, excluding these columns:
 Rating Date, CIK, Ticker, Sector, SIC Code, Corporation, Rating Agency, Rating
 
+Download test data CSV from left menu link of Streamlit App
+
 If your CSV includes the target column Binary Rating, the app will compute evaluation metrics dynamically.
 If the CSV does not include the target, the app will only generate predictions and probabilities.
 Feature order must match the training dataset.
