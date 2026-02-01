@@ -150,7 +150,8 @@ Random Forest: 200 trees, ensemble model
 XGBoost: Gradient boosting, objective = binary:logistic
 
 ## 11. Deployment
-The app is deployed on Streamlit Community Cloud.
+The app is deployed on Streamlit Community Cloud. The app has two radio buttons i.e. ML App and Dataset info. In ML App Model evaluation and Prediction on test data tabs are avialable and in dataset info you can preview the train data
+
 https://mlassignment2-hemeshjoshi.streamlit.app/
 
 ## 12. Author Hemesh Joshi
