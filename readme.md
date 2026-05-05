@@ -1,4 +1,4 @@
-# Corporate Credit Rating Prediction (Binary Classification) - ML Assignment 2
+# Corporate Credit Risk Classifier for Investment Decision Support
 
 🔗 Live Streamlit App:
 https://mlassignment2-hemeshjoshi.streamlit.app/
@@ -8,9 +8,20 @@ https://mlassignment2-hemeshjoshi.streamlit.app/
 
 **Business Problem Framing:** Binary Credit Rating Classification
 
-Credit rating agencies such as Standard & Poor’s (S&P) assign detailed credit ratings (AAA, AA+, AA, …, D) to evaluate a company’s creditworthiness. However, in many real-world financial decision-making scenarios—such as investment screening, credit risk assessment, and lending approvals—the primary requirement is to determine whether a company is Investment Grade or Non-Investment Grade, rather than predicting the exact rating category.
+## Problem Statement
 
-To align the machine learning solution with this practical business objective, the original multi-class credit rating labels were intentionally dropped, and the problem was reformulated as a binary classification task based on Standard & Poor’s Credit Ratings.
+This project builds a machine learning system to classify companies into:
+
+- Investment Grade (BBB− and above)
+- Non-Investment Grade (below BBB−)
+
+### Why this matters
+Financial institutions, investors, and lenders often require a **binary creditworthiness signal** for:
+- Loan approval decisions
+- Risk assessment
+- Portfolio filtering
+
+Instead of predicting complex multi-class ratings, this system simplifies decision-making into a **high-impact binary classification problem**.
 
 **Target Variable Definition**
 
@@ -35,6 +46,20 @@ Number of Records: > 500
 Number of Features: > 12
 
 The dataset satisfies all assignment constraints regarding minimum instance size and feature count.
+
+### Key Features
+- Financial ratios (liquidity, leverage, profitability)
+- Company-level financial indicators
+
+### Data Challenges
+- Potential class imbalance between investment and non-investment grades
+- Correlated financial features
+- Need for feature scaling (especially for KNN, Logistic Regression)
+
+### Preprocessing Steps
+- Missing value handling
+- Feature scaling (StandardScaler)
+- Train-test split (mention ratio explicitly)
 
 ```bash
 import kagglehub
@@ -91,8 +116,8 @@ Each model is evaluated using the following metrics as required by the assignmen
 ml_assignment_2/
 - model/
   -  saved_models.pkl # Pickled trained models & scaler
-  -  train_models.py
-  -  evaluate.py
+  -  train_models.py  # Training the model
+  -  evaluate.py # model evaluation logic
 - data/
   - CreditRatingPrediction_train.csv # Training dataset
   - CreditRatingPrediction_test.csv # Training dataset
